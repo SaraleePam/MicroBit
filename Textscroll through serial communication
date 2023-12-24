@@ -1,0 +1,25 @@
+#on microbit 1
+def on_forever():
+    basic.show_string(serial.read_string())
+basic.forever(on_forever)
+
+#on microbit 2
+from microbit import *
+
+while True:
+    if uart.any():
+        received_text = uart.read_until(b'\n').decode('utf-8').strip()
+        display.scroll(received_text)
+
+
+#on laptop
+
+import serial
+import time
+
+ser = serial.Serial('COMx', 115200)  # Replace 'COMx' with your Micro:bit's COM port
+
+while True:
+    text_to_send = input("Enter text to send: ")
+    ser.write((text_to_send + '\n').encode('utf-8'))
+    time.sleep(1)
