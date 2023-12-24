@@ -1,0 +1,42 @@
+
+
+
+#on microbit side
+
+from microbit import *
+import radio
+
+radio.on()
+
+while True:
+    message = radio.receive()
+    if message:
+        display.scroll(message)
+
+
+
+
+#on laptop side
+
+pip install microbit
+pip install radio
+
+
+
+import radio
+import time
+
+# Set the same channel on both Micro:bit and laptop
+channel = 7
+radio.config(channel=channel)
+radio.on()
+
+while True:
+    text_to_send = input("Enter text to send: ")
+    radio.send(text_to_send)
+    time.sleep(1)  # Optional delay to avoid flooding the radio channel
+
+
+#####
+
+
